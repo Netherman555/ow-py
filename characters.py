@@ -10,22 +10,22 @@
 ##             from.  This is just the data that the API returns and is given
 ##             in other files.
 ##
+##
 ##Version v.0.0.1.0
 
 import json
 import requests
 
-CHARACTERS = ['ana', 'ashe', 'baptiste', 'bastion', 'brigitte', 'dva', 'doomfist',
+CHARACTERS = ['ana', 'baptiste', 'bastion', 'brigitte', 'dva', 'doomfist',
               'genji', 'hanzo', 'junkrat', 'lucio', 'mccree', 'mei', 'mercy',
               'moira', 'orisa', 'pharah', 'reaper', 'reinhardt', 'roadhog', 'sigma',
               'soldier76', 'sombra', 'symmetra', 'torbjorn', 'tracer', 'widowmaker', 'winston',
-              'wrecking ball', 'zarya', 'zenyatta']
-MODES = ['quickplay', 'competitive']
+              'wrecking ball', 'zarya', 'zenyatta'] 
+STATS = ['timePlayed', 'gamesWon', 'winPercentage', 'weaponAccuracy', 'eliminationsPerLife', 'multiKillsBest', 'objectiveKills']
 
 class Character():
 
     def __init__(self, characterName, jsondata):
-
 
         if(characterName not in CHARACTERS):
             raise Exception("Invalid Character ID")
@@ -33,19 +33,17 @@ class Character():
             self.character = characterName
 
         self.jsondata = jsondata
+        self.quickPlayStats = {}
+        self.competitiveStats = {}
 
-        self.qptimePlayed = self.jsondata['quickPlayStats']['topHeroes'][self.character]['timePlayed']
-        self.qpgamesWon = self.jsondata['quickPlayStats']['topHeroes'][self.character]['gamesWon']
-        self.qpwinPercentage = self.jsondata['quickPlayStats']['topHeroes'][self.character]['winPercentage']
-        self.qpweaponAccuracy = self.jsondata['quickPlayStats']['topHeroes'][self.character]['weaponAccuracy']
-        self.qpelimsPerLife = self.jsondata['quickPlayStats']['topHeroes'][self.character]['eliminationsPerLife']
-        self.qpmultiKillBest = self.jsondata['quickPlayStats']['topHeroes'][self.character]['multiKillBest']
-        self.qpobjectiveKills = self.jsondata['quickPlayStats']['topHeroes'][self.character]['objectiveKills']
+        for stat in STATS:
+          try:
+            self.quickPlayStats[stat] = self.jsondata['quickPlayStats']['topHeroes'][self.character][stat]
+          except:
+            self.quickPlayStats[stat] = None
 
-        self.cptimePlayed = self.jsondata['competitiveStats']['topHeroes'][self.character]['timePlayed']
-        self.cpgamesWon = self.jsondata['competitiveStats']['topHeroes'][self.character]['gamesWon']
-        self.cpwinPercentage = self.jsondata['competitiveStats']['topHeroes'][self.character]['winPercentage']
-        self.cpweaponAccuracy = self.jsondata['competitiveStats']['topHeroes'][self.character]['weaponAccuracy']
-        self.cpelimsPerLife = self.jsondata['competitiveStats']['topHeroes'][self.character]['eliminationsPerLife']
-        self.cpmultiKillBest = self.jsondata['competitiveStats']['topHeroes'][self.character]['multiKillBest']
-        self.cpobjectiveKills = self.jsondata['competitiveStats']['topHeroes'][self.character]['objectiveKills']
+        for stat in STATS:
+          try:
+            self.competitiveStats[stat] = self.jsondata['competitiveStats']['topHeroes'][self.character][stat]
+          except:
+            self.competitiveStats[stat] = None
