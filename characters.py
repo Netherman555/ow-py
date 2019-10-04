@@ -16,7 +16,7 @@
 import json
 import requests
 
-CHARACTERS = ['ana', 'baptiste', 'bastion', 'brigitte', 'dva', 'doomfist',
+CHARACTERS = ['ana', 'baptiste', 'bastion', 'brigitte', 'dVa', 'doomfist',
               'genji', 'hanzo', 'junkrat', 'lucio', 'mccree', 'mei', 'mercy',
               'moira', 'orisa', 'pharah', 'reaper', 'reinhardt', 'roadhog', 'sigma',
               'soldier76', 'sombra', 'symmetra', 'torbjorn', 'tracer', 'widowmaker', 'winston',
